@@ -40,6 +40,6 @@
   </clr-select-container>
   
   <button  *ngIf="{issueNo} == null" class="btn btn-primary" type="submit">Create</button>
-    <button class="btn btn-outline" type="submit" (click)="modifyIssue()">Modify</button>
+    <button class="btn btn-primary" type="submit" (click)="modifyIssue()">Modify</button>
 <button class="btn" type="button" (click)="formClose.emit()">Cancel</button>
 </form>
