@@ -12,6 +12,12 @@
     <clr-dg-column [clrDgField]="'priority'">Priority
       </clr-dg-column>
     <clr-dg-row *clrDgItems="let issue of issues">
+      <clr-dg-action-overflow>
+        <button class="action-item" (click)="selectedIssue
+          = issue">Resolve</button>
+          <button class="action-item" (click)="selectedIssue
+          = issue">Modify</button>
+      </clr-dg-action-overflow>
       <clr-dg-cell>{{issue.issueNo}}</clr-dg-cell>
       <clr-dg-cell>{{issue.type}}</clr-dg-cell>
       <clr-dg-cell>{{issue.title}}</clr-dg-cell>
@@ -26,3 +32,6 @@
 
 </ng-container>
 <app-issue-report *ngIf="showReportIssue == true"  (formClose)="onCloseReport()"></app-issue-report>
+<app-confirm-dialog *ngIf="selectedIssue" 
+  [issueNo]="selectedIssue.issueNo" 
+   (confirm)="onConfirm($event)"></app-confirm-dialog>
