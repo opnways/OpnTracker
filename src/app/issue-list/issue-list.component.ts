@@ -11,6 +11,7 @@ export class IssueListComponent implements OnInit {
   issues: Issue[] = [];
   showReportIssue = false;
   selectedIssue: Issue | null = null;
+  numberIssue: number | null = null;
   constructor( private issueService: IssuesService) { }
 
   ngOnInit(): void {
@@ -29,10 +30,6 @@ export class IssueListComponent implements OnInit {
       this.getIssues();
     }
     this.selectedIssue = null;
-  }
-  onModify(issue: Issue) {
-    this.issueService.modifyIssue(issue);
-    this.getIssues();
   }
 
 }

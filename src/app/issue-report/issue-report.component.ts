@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output,  } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IssuesService } from '../issues.service';
 @Component({
@@ -7,8 +7,17 @@ import { IssuesService } from '../issues.service';
   styleUrls: ['./issue-report.component.css']
 })
 export class IssueReportComponent implements OnInit {
+  @Input() issueNo: number | null = null;
   @Output() formClose = new EventEmitter();
   issueForm: FormGroup | undefined;
+ 
+  issueData: any = {
+    title: '',
+    description: '',
+    priority: '',
+    type: '',
+
+  }
   constructor(private builder: FormBuilder, private issueService: IssuesService) { }
 
   ngOnInit(): void {  
@@ -19,6 +28,10 @@ export class IssueReportComponent implements OnInit {
     priority: ['', Validators.required],
     type: ['', Validators.required]
   });
+  if(this.issueNo != null){
+    this.issueData =  this.getIssue(this.issueNo);
+  console.log(this.issueData.title);
+  }
   }
   addIssue() {
     if(this.issueForm && this.issueForm.invalid) { 
