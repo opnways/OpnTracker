@@ -21,7 +21,7 @@ export class IssueReportComponent implements OnInit {
   constructor(private builder: FormBuilder, private issueService: IssuesService) { }
 
   ngOnInit(): void {  
-    
+    console.log(this.issueNo);
     this.issueForm = this.builder.group({
     title: ['', Validators.required],
     description: [''],
@@ -30,9 +30,16 @@ export class IssueReportComponent implements OnInit {
   });
   if(this.issueNo != null){
     this.issueData =  this.getIssue(this.issueNo);
-  console.log(this.issueData.title);
+  } else {
+    this.issueNo = null;
+    this.issueData = {
+      title: '',
+      description: '',
+      priority: '',
+      type: '',
+    }
   }
-  }
+}
   addIssue() {
     if(this.issueForm && this.issueForm.invalid) { 
       this.issueForm.markAllAsTouched();
@@ -40,6 +47,7 @@ export class IssueReportComponent implements OnInit {
     }
     this.issueService.createIssue(this.issueForm?.value);
     this.formClose.emit();
+    this.issueNo = null;
   }
 
   getIssue(issueNo: number) { 
@@ -52,7 +60,9 @@ export class IssueReportComponent implements OnInit {
       return;
     }
     this.issueService.modifyIssue(this.issueForm?.value);
+    this.issueNo = null;
     this.formClose.emit();
+    
   }
 
 

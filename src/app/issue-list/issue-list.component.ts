@@ -22,6 +22,7 @@ export class IssueListComponent implements OnInit {
   }
   onCloseReport() {
     this.showReportIssue = false;
+    this.numberIssue = null;
     this.getIssues();
   }
   onConfirm(confirmed: boolean) {
